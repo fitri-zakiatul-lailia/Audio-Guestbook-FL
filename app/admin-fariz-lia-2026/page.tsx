@@ -36,53 +36,103 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen px-6 py-12 max-w-2xl mx-auto">
-      <div className="flex items-baseline justify-between mb-2">
-        <h1 className="font-display italic text-3xl text-pine">Ucapan Tamu</h1>
-        <button
-          onClick={fetchRecordings}
-          className="focus-ring text-xs text-pine/60 hover:text-pine font-body underline"
-        >
-          Muat ulang
-        </button>
-      </div>
-      <p className="font-body text-sm text-ink/50 mb-8">
-        {loading ? "Memuat…" : `${recordings.length} rekaman tersimpan`}
-      </p>
-
-      {error && <p className="text-red-600 font-body text-sm mb-6">{error}</p>}
-
-      {!loading && recordings.length === 0 && !error && (
-        <p className="font-body text-sm text-ink/50">
-          Belum ada rekaman masuk. Rekaman tamu akan muncul di sini secara otomatis.
-        </p>
-      )}
-
-      <div className="space-y-3">
-        {recordings.map((r) => (
-          <div
-            key={r.pathname}
-            className="rounded-xl bg-white/60 border border-pine/10 p-4 flex flex-col sm:flex-row sm:items-center gap-3"
-          >
-            <div className="flex-1 min-w-0">
-              <p className="font-display text-lg text-pine truncate">{r.name}</p>
-              <p className="font-body text-xs text-ink/50">
-                {formatDate(r.uploadedAt || r.timestamp)} · {formatSize(r.size)}
+    <main className="min-h-screen px-5 py-10 sm:px-8 sm:py-16">
+      <div className="mx-auto w-full max-w-3xl">
+        <header className="relative mb-7 overflow-hidden rounded-[2rem] border border-rose/25 bg-porcelain/80
+                           px-6 py-7 shadow-romantic backdrop-blur-sm sm:px-8 sm:py-9">
+          <div className="pointer-events-none absolute -right-8 -top-14 h-40 w-40 rounded-full bg-petal/10 blur-2xl" />
+          <div className="relative flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="mb-2 font-body text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-roseDark/85">
+                Koleksi privat Fariz &amp; Lia
+              </p>
+              <h1 className="font-display text-4xl font-semibold leading-none text-roseDark sm:text-5xl">
+                Ucapan <span className="font-normal italic text-rose">Tamu</span>
+              </h1>
+              <p className="mt-3 font-display text-lg text-ink/65">
+                {loading ? "Memuat rekaman…" : `${recordings.length} rekaman tersimpan`}
               </p>
             </div>
-            <audio controls src={r.url} className="w-full sm:w-64 h-10" />
-            <a
-              href={r.url}
-              download
-              className="focus-ring shrink-0 text-xs font-body font-medium text-pine border border-pine/30
-                         px-4 py-2 rounded-full hover:bg-pine/5 transition-colors text-center"
+
+            <button
+              onClick={fetchRecordings}
+              className="focus-ring inline-flex w-fit items-center rounded-xl border border-rose/35 bg-white/60
+                         px-4 py-2.5 font-body text-xs font-semibold text-roseDark transition-colors
+                         hover:border-rose/60 hover:bg-blush"
             >
-              Unduh
-            </a>
+              Muat ulang
+            </button>
           </div>
-        ))}
+        </header>
+
+        {error && (
+          <p className="mb-6 rounded-xl border border-red-200 bg-red-50/80 px-4 py-3 font-body text-sm text-red-700">
+            {error}
+          </p>
+        )}
+
+        {!loading && recordings.length === 0 && !error && (
+          <div className="rounded-[1.75rem] border border-dashed border-rose/35 bg-porcelain/65 px-6 py-12 text-center shadow-sm">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-roseDark">
+              <SoundIcon />
+            </div>
+            <h2 className="mb-2 font-display text-2xl font-semibold text-roseDark">Belum ada rekaman</h2>
+            <p className="mx-auto max-w-md font-display text-lg leading-7 text-ink/65">
+              Rekaman tamu akan muncul di sini secara otomatis setelah dikirim.
+            </p>
+          </div>
+        )}
+
+        <div className="space-y-3">
+          {recordings.map((r) => (
+            <article
+              key={r.pathname}
+              className="flex flex-col gap-4 rounded-2xl border border-rose/15 bg-porcelain/80 p-4
+                         shadow-sm backdrop-blur-sm transition-colors hover:border-rose/30
+                         sm:flex-row sm:items-center sm:p-5"
+            >
+              <div className="min-w-0 flex-1">
+                <p className="truncate font-display text-2xl font-semibold text-roseDark">{r.name}</p>
+                <p className="font-body text-xs text-muted">
+                  {formatDate(r.uploadedAt || r.timestamp)} · {formatSize(r.size)}
+                </p>
+              </div>
+              <audio controls src={r.url} className="h-10 w-full sm:w-64" />
+              <a
+                href={r.url}
+                download
+                className="focus-ring shrink-0 rounded-xl border border-rose/35 px-4 py-2.5 text-center
+                           font-body text-xs font-semibold text-roseDark transition-colors hover:bg-rose/5"
+              >
+                Unduh
+              </a>
+            </article>
+          ))}
+        </div>
       </div>
     </main>
+  );
+}
+
+function SoundIcon() {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M3 10v4" />
+      <path d="M7 7v10" />
+      <path d="M11 4v16" />
+      <path d="M15 7v10" />
+      <path d="M19 10v4" />
+    </svg>
   );
 }
 

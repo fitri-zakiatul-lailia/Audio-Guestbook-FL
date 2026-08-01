@@ -7,17 +7,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ivory: "#FAF6EE",
-        pine: "#1F3A2E",
-        pineDark: "#152A21",
-        gold: "#C9A227",
-        goldLight: "#E4C765",
-        blush: "#D8A7A0",
-        ink: "#211D18",
+        porcelain: "#FFFBFD",
+        rose: "#B98196",
+        roseDark: "#8E4F68",
+        petal: "#F891BB",
+        blush: "#FFF5FB",
+        cream: "#FBF4D7",
+        mauve: "#DAB9C6",
+        ink: "#493740",
+        muted: "#806A74",
       },
       fontFamily: {
-        display: ["var(--font-fraunces)", "serif"],
-        body: ["var(--font-worksans)", "sans-serif"],
+        display: ["var(--font-cormorant)", "serif"],
+        body: ["var(--font-manrope)", "sans-serif"],
+      },
+      boxShadow: {
+        romantic: "0 18px 42px rgba(142, 79, 104, 0.09)",
+        petal: "0 6px 16px rgba(142, 79, 104, 0.14)",
       },
       keyframes: {
         pulseRing: {
@@ -29,10 +35,15 @@ module.exports = {
           "0%": { opacity: "0", transform: "translateY(12px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        softFloat: {
+          "0%, 100%": { transform: "translate3d(0, 0, 0) rotate(-4deg)" },
+          "50%": { transform: "translate3d(0, -8px, 0) rotate(2deg)" },
+        },
       },
       animation: {
         pulseRing: "pulseRing 1.8s ease-out infinite",
         fadeUp: "fadeUp 0.7s ease-out both",
+        softFloat: "softFloat 8s ease-in-out infinite",
       },
     },
   },

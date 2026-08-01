@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+
+# Build / output
+/dist/
+/build/
+/.next/
+/.nuxt/
+/.output/
+/.cache/
+coverage/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local runtime data
+uploads/
+storage/
+public/uploads/
+audio/
+media/
+recordings/
+
+# Audio / media artifacts (commonly generated at runtime)
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.ogg
+*.webm
+*.mp4
+*.mov
+
+# Optional: ignore local test artifacts
+coverage/
+*.local
