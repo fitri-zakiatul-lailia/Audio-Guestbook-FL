@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Vidaloka } from "next/font/google";
+import StartRecordingLink from "@/components/StartRecordingLink";
 
 const vidaloka = Vidaloka({
   subsets: ["latin"],
@@ -22,19 +22,10 @@ export default function HomePage() {
         <NameDivider />
 
         <p className="mx-7 mb-10 max-w-[21rem] font-display font-medium leading-1 text-ink/70 sm:mb-11 sm:max-w-sm sm:text-[1.4rem] sm:leading-9">
-          Titipkan suara dan doa terbaikmu untuk hari bahagia kami. Rekamanmu
-          akan menjadi kenangan yang kami dengarkan bertahun-tahun ke depan.
+          Satu ucapan darimu akan menjadi kenangan yang tak ternilai bagi kami. Rekam doa dan harapan terbaikmu untuk menemani perjalanan baru Fariz & Lia.
         </p>
 
-        <Link
-          href="/rekam"
-          className="focus-ring inline-flex w-full items-center justify-center gap-3 rounded-full bg-roseDark
-                     px-7 py-4 font-body text-sm font-semibold text-white shadow-petal transition-all
-                     duration-200 hover:-translate-y-0.5 hover:bg-ink hover:shadow-romantic sm:w-auto sm:px-9"
-        >
-          <MicIcon />
-          Mulai Merekam Ucapan
-        </Link>
+        <StartRecordingLink />
 
         <p className="mt-7 font-body text-[0.72rem] text-muted sm:mt-8">
           #digaRIZkanuntukLIA
@@ -55,25 +46,5 @@ function NameDivider() {
         <path d="M108 9H177" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
       </svg>
     </div>
-  );
-}
-
-function MicIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect x="9" y="2" width="6" height="12" rx="3" />
-      <path d="M5 10a7 7 0 0 0 14 0" />
-      <line x1="12" y1="19" x2="12" y2="22" />
-    </svg>
   );
 }
