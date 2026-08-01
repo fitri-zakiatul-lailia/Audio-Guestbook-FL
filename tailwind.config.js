@@ -22,8 +22,8 @@ module.exports = {
         body: ["var(--font-manrope)", "sans-serif"],
       },
       boxShadow: {
-        romantic: "0 18px 42px rgba(142, 79, 104, 0.09)",
-        petal: "0 6px 16px rgba(142, 79, 104, 0.14)",
+        romantic: "0 8px 24px rgba(142, 79, 104, 0.06)",
+        petal: "0 2px 8px rgba(142, 79, 104, 0.08)",
       },
       keyframes: {
         pulseRing: {
