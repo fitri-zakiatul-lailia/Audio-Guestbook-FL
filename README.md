@@ -7,9 +7,10 @@ tersimpan otomatis ke Vercel Blob Storage. Gratis untuk hosting.
 
 - `/` — Halaman utama: "Welcome to Fariz & Lia" + tombol mulai merekam
 - `/rekam` — Input nama, rekam (maks 60 detik), pause/lanjut/berhenti/ulangi/
-  dengarkan/hapus/simpan, konfirmasi permanen, lalu kembali ke halaman utama
+  dengarkan/hapus/simpan, lalu menampilkan konfirmasi bahwa rekaman tersimpan
 - `/admin-fariz-lia-2026` — Halaman **rahasia** untuk kamu: daftar semua
-  rekaman tamu, bisa didengarkan dan diunduh. Jangan bagikan link ini ke tamu.
+  rekaman tamu, bisa didengarkan, diunduh, dan dihapus permanen. Jangan bagikan
+  link ini ke tamu.
 
 ## Langkah 1 — Siapkan akun
 
@@ -66,14 +67,14 @@ Ini langkah penting supaya rekaman tamu benar-benar tersimpan.
 1. Buka link `https://ucapan-fariz-lia.vercel.app` di HP kamu.
 2. Klik "Mulai Merekam Ucapan", isi nama, izinkan akses mikrofon, coba rekam.
 3. Setelah simpan, buka `https://ucapan-fariz-lia.vercel.app/admin-fariz-lia-2026`
-   dan pastikan rekaman kamu muncul serta bisa diputar/diunduh.
+   dan pastikan rekaman kamu muncul serta bisa diputar atau diunduh.
 
 ## Langkah 6 — Bagikan ke tamu
 
 - Bagikan link utama (`https://ucapan-fariz-lia.vercel.app`) lewat undangan
   digital, WhatsApp, atau kode QR yang ditempel di venue.
 - **Simpan link admin untuk diri sendiri saja** — siapa pun yang tahu link
-  itu bisa mendengarkan & mengunduh semua rekaman tamu.
+  itu bisa mendengarkan, mengunduh, dan menghapus permanen rekaman tamu.
 
 ## Mengganti nama pengantin / teks
 
@@ -83,17 +84,18 @@ Ini langkah penting supaya rekaman tamu benar-benar tersimpan.
 - Warna & font: edit `tailwind.config.js` (warna) dan `app/layout.tsx`
   (font Google — saat ini "Cormorant Garamond" untuk judul dan "Manrope"
   untuk teks).
-- Link admin rahasia: ganti nama folder
-  `app/admin-fariz-lia-2026` menjadi apapun yang kamu suka, semakin unik
-  semakin aman (contoh: `app/rahasia-xyz123`).
+- Link admin dapat diganti dengan mengubah nama folder
+  `app/admin-fariz-lia-2026` (contoh: `app/rahasia-xyz123`). Nama route yang
+  sulit ditebak hanya menyamarkan URL dan bukan autentikasi. Tambahkan
+  autentikasi sebelum website dipublikasikan jika akses admin harus benar-benar
+  dibatasi.
 
 ## Batasan yang perlu diketahui
 
 - Free tier Vercel Blob Storage: sekitar 1GB penyimpanan gratis — cukup
   untuk ribuan rekaman 60 detik.
-- Rekaman yang sudah disimpan tamu tidak bisa dihapus lewat website (sesuai
-  desain), tapi kamu tetap bisa menghapusnya manual lewat dashboard Vercel
-  Storage kalau memang perlu.
+- Rekaman dapat dihapus permanen melalui halaman admin. Penghapusan ini tidak
+  dapat dibatalkan atau dipulihkan dari website.
 - Perlu koneksi internet aktif saat tamu merekam & menyimpan (bukan mode
   offline).
 - Akses mikrofon browser memerlukan HTTPS — otomatis tersedia dari Vercel,

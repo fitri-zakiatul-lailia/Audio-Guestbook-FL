@@ -296,7 +296,7 @@ export default function RekamPage() {
         ) : (
           <>
             <p className="mb-2 font-body text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-roseDark/85">
-              Voice guestbook
+              Audio guestbook
             </p>
             <h2 className="mb-1 font-display text-4xl font-semibold leading-none text-roseDark">
               Ucapan <span className="font-normal italic text-rose">untukmu</span>
