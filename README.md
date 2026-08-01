@@ -81,7 +81,8 @@ Ini langkah penting supaya rekaman tamu benar-benar tersimpan.
   `Fariz` dan `Lia`.
 - Judul tab browser & deskripsi: edit `app/layout.tsx` bagian `metadata`.
 - Warna & font: edit `tailwind.config.js` (warna) dan `app/layout.tsx`
-  (font Google — saat ini "Fraunces" untuk judul, "Work Sans" untuk teks).
+  (font Google — saat ini "Cormorant Garamond" untuk judul dan "Manrope"
+  untuk teks).
 - Link admin rahasia: ganti nama folder
   `app/admin-fariz-lia-2026` menjadi apapun yang kamu suka, semakin unik
   semakin aman (contoh: `app/rahasia-xyz123`).
