@@ -43,14 +43,99 @@ body {
   background: #fff9fc;
 }
 
-.floral-edge-art {
+.botanical-stage {
+  position: relative;
   width: 100%;
   height: 100%;
-  max-width: 42rem;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0.6;
-  mix-blend-mode: multiply;
+  max-width: 32rem;
+}
+
+.botanical-flower {
+  position: absolute;
+  width: clamp(3rem, 14vw, 4.6rem);
+  aspect-ratio: 1;
+  animation: botanical-drift-a 10.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.botanical-flower-art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.56;
+  filter: saturate(0.84) contrast(0.96);
+  transform: rotate(var(--flower-rotation, 0deg));
+}
+
+.botanical-flower--flower-01 {
+  --flower-rotation: -8deg;
+  left: clamp(1rem, 5.5vw, 2rem);
+  top: 9%;
+}
+
+.botanical-flower--flower-02 {
+  --flower-rotation: 7deg;
+  right: clamp(1rem, 5.5vw, 2rem);
+  top: 15%;
+  width: clamp(2.9rem, 13.5vw, 4.35rem);
+  animation-name: botanical-drift-b;
+  animation-duration: 12s;
+  animation-delay: -4.5s;
+}
+
+.botanical-flower--flower-03 {
+  --flower-rotation: -5deg;
+  left: clamp(1.15rem, 6vw, 2.15rem);
+  top: 40%;
+  width: clamp(2.85rem, 13vw, 4.2rem);
+  animation-name: botanical-drift-c;
+  animation-duration: 9.5s;
+  animation-delay: -2.5s;
+}
+
+.botanical-flower--flower-04 {
+  --flower-rotation: 8deg;
+  right: clamp(1.05rem, 5.7vw, 2.05rem);
+  top: 54%;
+  width: clamp(3.1rem, 14.5vw, 4.7rem);
+  animation-delay: -6s;
+}
+
+.botanical-flower--flower-05 {
+  --flower-rotation: -9deg;
+  left: clamp(1rem, 5.5vw, 2rem);
+  top: 69%;
+  width: clamp(3.15rem, 14.5vw, 4.75rem);
+  animation-name: botanical-drift-b;
+  animation-duration: 11.5s;
+  animation-delay: -8s;
+}
+
+.botanical-flower--flower-06 {
+  --flower-rotation: -3deg;
+  left: clamp(1.2rem, 6.2vw, 2.25rem);
+  top: 86%;
+  width: clamp(2.8rem, 12.5vw, 4.1rem);
+  animation-name: botanical-drift-c;
+  animation-duration: 10s;
+  animation-delay: -5s;
+}
+
+.botanical-flower--flower-07 {
+  --flower-rotation: 10deg;
+  right: clamp(1.25rem, 6.4vw, 2.3rem);
+  top: 82%;
+  width: clamp(2.6rem, 11.5vw, 3.7rem);
+  animation-duration: 12.5s;
+  animation-delay: -9s;
+}
+
+.rekam-page--checking {
+  opacity: 0;
+}
+
+.rekam-page--entering {
+  animation: rekam-route-in 680ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
 .voice-wave-halo,
@@ -101,6 +186,56 @@ audio {
   }
 }
 
+@keyframes botanical-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-0.5deg);
+  }
+  40% {
+    transform: translate3d(2px, -4px, 0) rotate(0.8deg);
+  }
+  72% {
+    transform: translate3d(-2px, 2px, 0) rotate(-0.2deg);
+  }
+}
+
+@keyframes botanical-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0.7deg);
+  }
+  45% {
+    transform: translate3d(-3px, -3px, 0) rotate(-0.8deg);
+  }
+  76% {
+    transform: translate3d(1px, 2px, 0) rotate(0.2deg);
+  }
+}
+
+@keyframes botanical-drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-0.3deg);
+  }
+  38% {
+    transform: translate3d(2px, 3px, 0) rotate(0.9deg);
+  }
+  70% {
+    transform: translate3d(-1px, -3px, 0) rotate(-0.7deg);
+  }
+}
+
+@keyframes rekam-route-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -108,5 +243,15 @@ audio {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+
+  .botanical-flower {
+    animation: none !important;
+  }
+
+  .rekam-page--entering {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
   }
 }

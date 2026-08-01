@@ -2,10 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { RECORDING_ENTRY_STORAGE_KEY } from "@/components/StartRecordingLink";
 
 const MAX_SECONDS = 60;
+const ENTRY_ANIMATION_MAX_AGE = 30_000;
 
 type RecState = "idle" | "recording" | "paused" | "preview" | "saving" | "saved";
+type EntryMotion = "checking" | "animate" | "static";
 
 export default function RekamPage() {
   const [name, setName] = useState("");
@@ -16,6 +19,7 @@ export default function RekamPage() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [isVisualizerSupported, setIsVisualizerSupported] = useState(false);
+  const [entryMotion, setEntryMotion] = useState<EntryMotion>("checking");
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -29,6 +33,32 @@ export default function RekamPage() {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const rafRef = useRef<number | null>(null);
+  const entryMotionCheckedRef = useRef(false);
+
+  useEffect(() => {
+    if (entryMotionCheckedRef.current) return;
+    entryMotionCheckedRef.current = true;
+
+    let shouldAnimate = false;
+
+    try {
+      const entryTimestamp = Number(
+        sessionStorage.getItem(RECORDING_ENTRY_STORAGE_KEY)
+      );
+      sessionStorage.removeItem(RECORDING_ENTRY_STORAGE_KEY);
+
+      const entryAge = Date.now() - entryTimestamp;
+      shouldAnimate =
+        Number.isFinite(entryTimestamp) &&
+        entryTimestamp > 0 &&
+        entryAge >= 0 &&
+        entryAge <= ENTRY_ANIMATION_MAX_AGE;
+    } catch {
+      // A direct, non-animated entry is safe when browser storage is unavailable.
+    }
+
+    setEntryMotion(shouldAnimate ? "animate" : "static");
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -264,9 +294,17 @@ export default function RekamPage() {
   const mm = String(Math.floor(elapsed / 60)).padStart(2, "0");
   const ss = String(elapsed % 60).padStart(2, "0");
   const progress = Math.min(elapsed / MAX_SECONDS, 1);
+  const entryMotionClass =
+    entryMotion === "checking"
+      ? "rekam-page--checking"
+      : entryMotion === "animate"
+        ? "rekam-page--entering"
+        : "";
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-5 py-10 sm:px-8 sm:py-16">
+    <main
+      className={`rekam-page min-h-screen flex flex-col items-center justify-center px-5 py-10 sm:px-8 sm:py-16 ${entryMotionClass}`}
+    >
       <div className="w-full max-w-md">
         <Link
           href="/"
@@ -299,10 +337,10 @@ export default function RekamPage() {
               Audio guestbook
             </p>
             <h2 className="mb-1 font-display text-4xl font-semibold leading-none text-roseDark">
-              Ucapan <span className="font-normal italic text-rose">untukmu</span>
+              Rekam <span className="font-normal italic text-rose">ucapanmu</span>
             </h2>
             <p className="mb-8 font-display text-lg leading-7 text-ink/65">
-              Fariz &amp; Lia akan mendengarkan setiap kata darimu.
+              Rekam doa dan ucapan terbaikmu untuk kami. Kenangan ini akan kami simpan selamanya.
             </p>
 
             {state === "idle" && (
